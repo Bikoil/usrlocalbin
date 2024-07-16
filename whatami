@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Function to get OS name
+get_os_name() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS_NAME="$NAME"
+    elif [ "$(uname)" == "FreeBSD" ]; then
+        OS_NAME="FreeBSD"
+    elif [ "$(uname)" == "Darwin" ]; then
+        OS_NAME="macOS"
+    else
+        OS_NAME="Unknown OS"
+    fi
+
+    # Determine the correct article to use
+    if [[ $OS_NAME == [AEIOUaeiou]* ]]; then
+        echo "An $OS_NAME user"
+    else
+        echo "A $OS_NAME user"
+    fi
+}
+
+# Display OS name
+get_os_name

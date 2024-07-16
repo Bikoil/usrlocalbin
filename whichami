@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+# Function to check sudo privileges
+check_sudo() {
+    if sudo -v >/dev/null 2>&1; then
+        echo "You are a user with sudo privileges"
+    else
+        echo "You are a user without sudo privileges"
+    fi
+}
+
+# Main script
+check_sudo
+

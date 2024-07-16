@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Function to detect Desktop Environment or Window Manager
+detect_de_or_wm() {
+    # Check if running under X11
+    if [ "$XDG_SESSION_TYPE" = "x11" ]; then
+        # Check for GNOME
+        if [ "$XDG_CURRENT_DESKTOP" = "GNOME" ]; then
+            echo "You are in GNOME DE"
+        # Check for KDE Plasma
+        elif [ "$XDG_CURRENT_DESKTOP" = "KDE" ]; then
+            echo "You are in KDE Plasma"
+        # Check for Xfce
+        elif [ "$XDG_CURRENT_DESKTOP" = "Xfce" ]; then
+            echo "You are in Xfce DE"
+        # Check for LXQt
+        elif [ "$XDG_CURRENT_DESKTOP" = "LXQt" ]; then
+            echo "You are in LXQt DE "
+        elif [ "$XDG_CURRENT_DESKTOP" = "LXDE" ]; then
+            echo "You are in LXDE"
+        else
+            # Check for other X11 window managers
+            wm=$(echo "$XDG_SESSION_DESKTOP" | tr '[:upper:]' '[:lower:]')
+            echo "You are in $wm WM"
+        fi
+    elif [ "$WAYLAND_DISPLAY" ]; then
+        # Check for Wayland compositors (e.g., sway, GNOME on Wayland)
+        echo "You are in a Wayland WM"
+    else
+        echo "You are in an Unknown DE/WM"
+    fi
+}
+
+# Main script
+de_or_wm=$(detect_de_or_wm)
+
+echo "$de_or_wm"
+
