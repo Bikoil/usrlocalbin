@@ -9,6 +9,7 @@ su
 ```sh
 cd /usr/local/bin/
 git clone https://github.com/Bikoil/usrlocalbin 
+mv usrlocalbin/* ./ && rm -rf usrlocalbin
 chmod +x ./*
 rm README.md && rm LICENSE
 exit
